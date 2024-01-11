@@ -19,4 +19,13 @@ cat("Ejercicio 3:\n", "Media de números del 25 al 95:", media_25_95, "\nSuma de
 vector_aleatorio <- sample(-100:500, 10, replace = TRUE)
 cat("Ejercicio 4:\n", "Vector aleatorio:", vector_aleatorio, "\n")
 
+# Ejercicio 5 
+fb <- numeric(10)
+fb[1] <- fb[2] <- 1
+for (i in 3:10) {
+  fb[i] <- fb[i-1] + fb[i-2]
+}
+cat("Los primeros 10 números de Fibonacci son:", fb, "\n")
+
+
 
