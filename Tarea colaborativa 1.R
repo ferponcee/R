@@ -65,3 +65,17 @@ cuenta <- function(vector, valor) {
 # Prueba de la función con el ejemplo dado
 resultado_prueba <- cuenta(c(10, 2, 10, 7, 2, 7, 2), 7)
 cat("Salida:", resultado_prueba, "\n")
+
+#Ejercicio 9 
+enesimo <- function(vector, n) {
+  if (n <= 0) {
+    stop("El valor de 'n' debe ser un número entero positivo.")
+  }
+  
+  indices <- seq(from = 1, to = length(vector), by = n)
+  return(vector[indices])
+}
+#Prueba de la función con el ejemplo dado
+resultado <- enesimo(1:100, 5)
+print(resultado)
+
