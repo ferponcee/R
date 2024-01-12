@@ -56,3 +56,12 @@ minimo <- function(vector) {
 function multiplica(x, y) {
   return(x * y)
 }
+#Ejercicio 8 
+cuenta <- function(vector, valor) {
+  resultado <- sum(vector == valor)
+  return(resultado)
+}
+
+# Prueba de la función con el ejemplo dado
+resultado_prueba <- cuenta(c(10, 2, 10, 7, 2, 7, 2), 7)
+cat("Salida:", resultado_prueba, "\n")
