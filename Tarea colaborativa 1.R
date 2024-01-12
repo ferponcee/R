@@ -92,10 +92,12 @@ cat("Ejercicio 8:\n
 
 # Ejercicio 9
 enesimo <- function(vector, n) {
-  for (i in 1:length(vector)) {
-    vector[i] <- (vector[i] * n) - 4
+  if (n <= 0) {
+    stop("El valor de 'n' debe ser un número entero positivo.")
   }
-  return(vector)
+  
+  indices <- seq(from = 1, to = length(vector), by = n)
+  return(vector[indices])
 }
 
 cat("Ejercicio 9:\n",
