@@ -52,10 +52,25 @@ minimo <- function(vector) {
   return(min)
 }
 
+minimo_prueba <- minimo(vector_prueba)
+maximo_prueba <- maximo(vector_prueba)
+minimo_prueba2 <- minimo(vector_prueba2)
+maximo_prueba2 <- maximo(vector_prueba2)
+
+cat("Ejercicio 6:\n", 
+    "Mínimo del vector 1:", minimo_prueba, 
+    "\nMáximo del vector 1:", maximo_prueba, 
+    "\nMínimo del vector 2:", minimo_prueba2, 
+    "\nMáximo del vector 2:", maximo_prueba2, "\n\n")
+
+
 # Ejercicio 7
-function multiplica(x, y) {
+multiplica <-function(x, y) {
   return(x * y)
 }
+result7 = multiplica(c(20, 10), c(3,4))
+cat("Ejercicio 7:\n", "Multiplicación de vectores:", result7, "\n\n")
+
 #Ejercicio 8 
 cuenta <- function(vector, valor) {
   resultado <- sum(vector == valor)
@@ -64,4 +79,16 @@ cuenta <- function(vector, valor) {
 
 # Prueba de la función con el ejemplo dado
 resultado_prueba <- cuenta(c(10, 2, 10, 7, 2, 7, 2), 7)
-cat("Salida:", resultado_prueba, "\n")
+cat("Ejercicio 8:\n
+    Salida:", resultado_prueba, "\n")
+
+# Ejercicio 9
+enesimo <- function(vector, n) {
+  for (i in 1:length(vector)) {
+    vector[i] <- (vector[i] * n) - 4
+  }
+  return(vector)
+}
+
+cat("Ejercicio 9:\n",
+    enesimo(1:100, 5), "\n\n")
