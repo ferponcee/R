@@ -64,7 +64,58 @@ cat("Ejercicio 4:
     Cadena de RNA: ", RNA(Cadena90), sep = "")
 
 # Ejercicio 5
+sec_p <- function(rna) {
+  prot <- switch(rna,
+    "UUU", "UUC", "Phe",
+    "UUA", "UUG", "Leu",
+    "UCU", "UCC", "UCA", "UCG", "Ser",
+    "UAU", "UAC", "Tyr",
+    "UGU", "UGC", "Cys",
+    "UGG", "Trp",
+    "CUU", "CUC", "CUA", "CUG", "Leu",
+    "CCU", "CCC", "CCA", "CCG", "Pro",
+    "CAU", "CAC", "His",
+    "CAA", "CAG", "Gin",
+    "CGU", "CGC", "CGA", "CGG", "Arg",
+    "AUU", "AUC", "AUA", "Ile",
+    "AUG", "Met",
+    "ACU", "ACC", "ACA", "ACG", "Thr",
+    "AAU", "AAC", "Asn",
+    "AAA", "AAG", "Lys",
+    "AGU", "AGC", "Ser",
+    "AGA", "AGG", "Arg",
+    "GUU", "GUC", "GUA", "GUG", "Val",
+    "GCU", "GCC", "GCA", "GCG", "Ala",
+    "GAU", "GAC", "Asp",
+    "GAA", "GAG", "Glu",
+    "GGU", "GGC", "GGA", "GGG", "Gly",
+    "UAA", "UAG", "UGA", "Stop",
+    "Unknown"
+  )
+  
+  return(prot)
+}
 
+# Crear variables para probar
+Cadena90 <- DNA_random(90)
+Cadena89 <- DNA_random(89)
+rna_ejercicio4 <- RNA(Cadena90)
+rna_nuevo <- RNA(Cadena89)
+
+# Ejecutar la función sec_p con las variables creadas
+resultado_ejercicio4 <- sec_p(rna_ejercicio4)
+resultado_nuevo <- sec_p(rna_nuevo)
+
+# Mostrar resultados
+cat("Ejercicio 4:
+    Cadena de DNA: ", Cadena90, "
+    Cadena de RNA: ", rna_ejercicio4, "
+    Aminoácido correspondiente: ", resultado_ejercicio4, "\n")
+
+cat("\nNueva variable con n = 89:
+    Cadena de DNA: ", Cadena89, "
+    Cadena de RNA: ", rna_nuevo, "
+    Aminoácido correspondiente: ", resultado_nuevo, "\n")
 
 #Ejercicio 6 
 invertir_hebra <- function(hebra_directa) {
