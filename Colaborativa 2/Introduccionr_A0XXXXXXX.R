@@ -64,3 +64,40 @@ cat("Ejercicio 4:
     Cadena de RNA: ", RNA(Cadena90), sep = "")
 
 # Ejercicio 5
+
+
+#Ejercicio 6 
+invertir_hebra <- function(hebra_directa) {
+  invertida <- rev(strsplit(hebra_directa, "")[[1]])
+  return(paste(invertida, collapse = ""))
+}
+hebra_directa <- "5'-TGCGATAC-3'"
+invertir_hebra(hebra_directa)
+
+#Ejercicio 7 
+obtener_hebra_complementaria <- function(hebra_directa) {
+  complemento <- c('A'='T', 'T'='A', 'C'='G', 'G'='C')
+  hebra_complementaria <- sapply(strsplit(hebra_directa, ''), function(base) complemento[base])
+  return(paste(hebra_complementaria, collapse = ''))
+}
+
+hebra_directa <- 'TGCGATAC'
+hebra_complementaria <- obtener_hebra_complementaria(hebra_directa)
+
+cat("Hebra directa: ", hebra_directa, "\n")
+cat("Hebra complementaria: ", hebra_complementaria, "\n")
+
+
+#Ejercicio 8 
+obtener_complementaria_inversa <- function(hebra_directa) {
+  complemento <- c('A'='T', 'T'='A', 'C'='G', 'G'='C')
+  hebra_complementaria <- sapply(strsplit(hebra_directa, ''), function(base) complemento[base])
+  hebra_complementaria_inversa <- rev(hebra_complementaria)
+  return(paste(hebra_complementaria_inversa, collapse = ''))
+}
+
+hebra_directa <- 'TGCGATAC'
+hebra_complementaria_inversa <- obtener_complementaria_inversa(hebra_directa)
+
+cat("Hebra directa: ", hebra_directa, "\n")
+cat("Hebra complementaria inversa: ", hebra_complementaria_inversa, "\n")
