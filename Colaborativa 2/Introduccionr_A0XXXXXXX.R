@@ -56,12 +56,14 @@ transcripcion = function(d){
   rna = character(length(d))
   for (i in 1:length(d)){
     if (d[i] == "A") rna[i] = "U"
-    else if (d[i] == "T") rna[i] = "A"
+    else if (d[i] == "T") rna[i] = "A"  # Aquí estaba el error, se debe cambiar T por U
     else if (d[i] == "C") rna[i] = "G"
     else if (d[i] == "G") rna[i] = "C"
   }
   return(paste(rna, collapse = ""))
 }
+
+
 # Transcribir la secuencia del Ejercicio 3 de DNA a RNA
 transcripcion_resultado = transcripcion(Cadena90)
 print(transcripcion_resultado)
