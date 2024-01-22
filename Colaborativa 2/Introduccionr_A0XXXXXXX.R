@@ -1,24 +1,22 @@
-# Ejercicio 1
-DNA_random <- function(n){
-  DNA <- c("A", "T", "C", "G")
-  DNA_random <- sample(DNA, n, replace = TRUE)
-  return(DNA_random)
+# Ejercicio 1 
+adn = function(n){
+  cadena = c("A","T","G","C")
+  cadena_adn = sample(cadena, n, replace = TRUE)
+  return(cadena_adn)
 }
-
-Cadena <- DNA_random(50)
-cat("Ejercicio 1:
-    Secuencia aleatoria de DNA: ", Cadena, sep = "")
+secuencia_adn = adn(50)
+print(secuencia_adn)
 
 # Ejercicio 2
-DNA_size <- function(DNA){
-  return(length(DNA))
+tamanio = function(t){
+  n = length(t)
+  return(n)
 }
-
-cat("Ejercicio 2:
-    Longitud de la secuencia de DNA: ", DNA_size(Cadena))
+tamanio_secuencia = tamanio(secuencia_adn)
+print(tamanio_secuencia)
 
 # Ejercicio 3
-Cadena90 <- DNA_random(90)
+Cadena90 <- adn(90)
 porcentaje <- function(Cadena90){
   contador_A <- 0
   contador_T <- 0
@@ -48,107 +46,163 @@ cat("Ejercicio 3:
     Porcentaje de C: ", porcentaje(Cadena90)[3],"%", "
     Porcentaje de G: ", porcentaje(Cadena90)[4], "%", sep = "")
 
-
 # Ejercicio 4
-RNA <- function(Cadena90){
-  RNA <- Cadena90
-  for (i in 1:length(Cadena90)){
-    if (Cadena90[i] == "T"){
-      RNA[i] <- "U"
+transcripcion = function(d){
+  if (length(d) %% 3 != 0) {
+    cat("La longitud de la secuencia de RNA no es un múltiplo de 3. Se agregarán bases adicionales al final.\n")
+    d = c(d, sample(c("A", "U", "C", "G"), length(d) %% 3, replace = TRUE))
+  }
+  
+  rna = character(length(d))
+  for (i in 1:length(d)){
+    if (d[i] == "A") rna[i] = "U"
+    else if (d[i] == "T") rna[i] = "A"
+    else if (d[i] == "C") rna[i] = "G"
+    else if (d[i] == "G") rna[i] = "C"
+  }
+  return(paste(rna, collapse = ""))
+}
+# Transcribir la secuencia del Ejercicio 3 de DNA a RNA
+transcripcion_resultado = transcripcion(Cadena90)
+print(transcripcion_resultado)
+
+
+# Ejercicio5
+traduccion_lista = function(lista_codones) {
+  proteinas = character(length(lista_codones)/3)
+  
+  for (i in seq(1, length(lista_codones), by = 3)) {
+    if (i + 2 <= length(lista_codones)) {
+      codon = paste(lista_codones[i:(i+2)], collapse = "")
+      
+      aminoacido = ifelse(codon == "UUU" | codon == "UUC", "Phe",
+        ifelse(codon == "UUA" | codon == "UUG", "Leu",
+          ifelse(codon == "UCU" | codon == "UCC" | codon == "UCA" | codon == "UCG", "Ser",
+            ifelse(codon == "UAU" | codon == "UAC", "Tyr",
+              ifelse(codon == "UAA" | codon == "UAG" | codon == "UGA", "STOP",
+                ifelse(codon == "UGU" | codon == "UGC", "Cys",
+                  ifelse(codon == "UGG", "Trp",
+                    ifelse(codon == "CUU" | codon == "CUC" | codon == "CUA" | codon == "CUG", "Leu",
+                      ifelse(codon == "CCU" | codon == "CCC" | codon == "CCA" | codon == "CCG", "Pro",
+                        ifelse(codon == "CAU" | codon == "CAC", "His",
+                          ifelse(codon == "CAA" | codon == "CAG", "Gln",
+                            ifelse(codon == "CGU" | codon == "CGC" | codon == "CGA" | codon == "CGG", "Arg",
+                              ifelse(codon == "AUU" | codon == "AUC" | codon == "AUA", "Ile",
+                                ifelse(codon == "AUG", "Met",
+                                  ifelse(codon == "ACU" | codon == "ACC" | codon == "ACA" | codon == "ACG", "Thr",
+                                    ifelse(codon == "AAU" | codon == "AAC", "Asn",
+                                      ifelse(codon == "AAA" | codon == "AAG", "Lys",
+                                        ifelse(codon == "AGU" | codon == "AGC", "Ser",
+                                          ifelse(codon == "AGA" | codon == "AGG", "Arg",
+                                            ifelse(codon == "GUU" | codon == "GUC" | codon == "GUA" | codon == "GUG", "Val",
+                                              ifelse(codon == "GCU" | codon == "GCC" | codon == "GCA" | codon == "GCG", "Ala",
+                                                ifelse(codon == "GAU" | codon == "GAC", "Asp",
+                                                  ifelse(codon == "GAA" | codon == "GAG", "Glu",
+                                                    ifelse(codon == "GGU" | codon == "GGC" | codon == "GGA" | codon == "GGG", "Gly", "UNK")
+                                                  )
+                                                )
+                                              )
+                                            )
+                                          )
+                                        )
+                                      )
+                                    )
+                                  )
+                                )
+                              )
+                            )
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+      
+      proteinas[(i+2)/3] = aminoacido
     }
   }
-  return(RNA)
-}
-cat("Ejercicio 4:
-    Cadena de DNA: ", Cadena90, "
-    Cadena de RNA: ", RNA(Cadena90), sep = "")
-
-# Ejercicio 5
-sec_p <- function(rna) {
-  prot <- switch(rna,
-    "UUU", "UUC", "Phe",
-    "UUA", "UUG", "Leu",
-    "UCU", "UCC", "UCA", "UCG", "Ser",
-    "UAU", "UAC", "Tyr",
-    "UGU", "UGC", "Cys",
-    "UGG", "Trp",
-    "CUU", "CUC", "CUA", "CUG", "Leu",
-    "CCU", "CCC", "CCA", "CCG", "Pro",
-    "CAU", "CAC", "His",
-    "CAA", "CAG", "Gin",
-    "CGU", "CGC", "CGA", "CGG", "Arg",
-    "AUU", "AUC", "AUA", "Ile",
-    "AUG", "Met",
-    "ACU", "ACC", "ACA", "ACG", "Thr",
-    "AAU", "AAC", "Asn",
-    "AAA", "AAG", "Lys",
-    "AGU", "AGC", "Ser",
-    "AGA", "AGG", "Arg",
-    "GUU", "GUC", "GUA", "GUG", "Val",
-    "GCU", "GCC", "GCA", "GCG", "Ala",
-    "GAU", "GAC", "Asp",
-    "GAA", "GAG", "Glu",
-    "GGU", "GGC", "GGA", "GGG", "Gly",
-    "UAA", "UAG", "UGA", "Stop",
-    "Unknown"
-  )
   
-  return(prot)
+  return(proteinas)
 }
 
-# Crear variables para probar
-Cadena90 <- DNA_random(90)
-Cadena89 <- DNA_random(89)
-rna_ejercicio4 <- RNA(Cadena90)
-rna_nuevo <- RNA(Cadena89)
+# Traducir la secuencia de RNA del Ejercicio 4 a proteínas
+traduccion_resultado = traduccion_lista(transcripcion_resultado)
+print(traduccion_resultado)
 
-# Ejecutar la función sec_p con las variables creadas
-resultado_ejercicio4 <- sec_p(rna_ejercicio4)
-resultado_nuevo <- sec_p(rna_nuevo)
+# Prueba del Ejercicio 5 con la variable del Ejercicio 4
+secuencia_adn_4 = adn(90)
+rna_secuencia_4 = transcripcion(secuencia_adn_4)
+proteinas_secuencia_4 = traduccion_lista(rna_secuencia_4)
+print(proteinas_secuencia_4)
 
-# Mostrar resultados
-cat("Ejercicio 4:
-    Cadena de DNA: ", Cadena90, "
-    Cadena de RNA: ", rna_ejercicio4, "
-    Aminoácido correspondiente: ", resultado_ejercicio4, "\n")
+# Nueva variable del Ejercicio 1 con n = 89
+secuencia_adn_nuevo = adn(89)
+rna_secuencia_nuevo = transcripcion(secuencia_adn_nuevo)
 
-cat("\nNueva variable con n = 89:
-    Cadena de DNA: ", Cadena89, "
-    Cadena de RNA: ", rna_nuevo, "
-    Aminoácido correspondiente: ", resultado_nuevo, "\n")
-
-#Ejercicio 6 
-invertir_hebra <- function(hebra_directa) {
-  invertida <- rev(strsplit(hebra_directa, "")[[1]])
-  return(paste(invertida, collapse = ""))
-}
-hebra_directa <- "5'-TGCGATAC-3'"
-invertir_hebra(hebra_directa)
-
-#Ejercicio 7 
-obtener_hebra_complementaria <- function(hebra_directa) {
-  complemento <- c('A'='T', 'T'='A', 'C'='G', 'G'='C')
-  hebra_complementaria <- sapply(strsplit(hebra_directa, ''), function(base) complemento[base])
-  return(paste(hebra_complementaria, collapse = ''))
+if (!is.null(rna_secuencia_nuevo)) {
+  proteinas_secuencia_nuevo = traduccion_lista(rna_secuencia_nuevo)
+  cat("\nProteínas de la nueva variable del Ejercicio 1 con n = 89:\n")
+  print(proteinas_secuencia_nuevo)
+} else {
+  cat("La longitud de la secuencia de RNA no es un múltiplo de 3. No se pueden traducir proteínas.\n")
 }
 
-hebra_directa <- 'TGCGATAC'
-hebra_complementaria <- obtener_hebra_complementaria(hebra_directa)
+#Ejercicio 6
 
-cat("Hebra directa: ", hebra_directa, "\n")
-cat("Hebra complementaria: ", hebra_complementaria, "\n")
+inversa = function(h){
+  hebra_inversa = rev(h)
+return(hebra_inversa)
+}
+hebra_directa = c("5'","T","G","C","G","A","T","A","C","3'")
+inversa(hebra_directa)
+
+
+#Ejercicio 7
+complementaria = function(h){
+  hebra_complementaria = c(1:length(h))
+  i = 1
+  while (i <= length(h)){
+   if (h[i] == "5'"){
+     c_5 = "3'"
+     hebra_complementaria = replace(hebra_complementaria,i,c_5)
+   } 
+   if (h[i] == "A"){
+     c_A = "T"
+     hebra_complementaria = replace(hebra_complementaria,i,c_A)
+   }
+   if (h[i] == "T"){
+     c_T = "A"
+     hebra_complementaria = replace(hebra_complementaria,i,c_T)
+   }
+   if (h[i] == "C"){
+     c_C = "G"
+     hebra_complementaria = replace(hebra_complementaria,i,c_C)
+   }
+   if (h[i] == "G"){
+     c_G = "C"
+     hebra_complementaria = replace(hebra_complementaria,i,c_G)
+   }
+   if (h[i] == "3'"){
+     c_3 = "5'"
+     hebra_complementaria = replace(hebra_complementaria,i,c_3)
+   }
+    i = i + 1
+  }
+return(hebra_complementaria)
+}
+hebra_directa = c("5'","T","G","C","G","A","T","A","C","3'")
+complementaria(hebra_directa)
 
 
 #Ejercicio 8 
-obtener_complementaria_inversa <- function(hebra_directa) {
-  complemento <- c('A'='T', 'T'='A', 'C'='G', 'G'='C')
-  hebra_complementaria <- sapply(strsplit(hebra_directa, ''), function(base) complemento[base])
-  hebra_complementaria_inversa <- rev(hebra_complementaria)
-  return(paste(hebra_complementaria_inversa, collapse = ''))
+complementaria_inversa = function(h){
+   hebra_complementaria_inversa = rev(h)
+return(hebra_complementaria_inversa)
 }
-
-hebra_directa <- 'TGCGATAC'
-hebra_complementaria_inversa <- obtener_complementaria_inversa(hebra_directa)
-
-cat("Hebra directa: ", hebra_directa, "\n")
-cat("Hebra complementaria inversa: ", hebra_complementaria_inversa, "\n")
+hebra_complementaria = c("3'","A", "C", "G", "C", "T", "A", "T", "G", "5'")
+complementaria_inversa(hebra_complementaria)
