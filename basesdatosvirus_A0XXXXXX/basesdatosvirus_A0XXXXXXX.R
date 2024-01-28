@@ -1,0 +1,27 @@
+library("seqinr")
+library("ggplot2")
+library("stringr")
+
+zika<-read.fasta("Base de datos/sequencesZIKA.fasta")
+sarscovid<-read.fasta("Base de datos/sequencesCovid.fasta")
+wuhan<-read.fasta("Base de datos/sequencesSARS1.fasta")
+mers<-read.fasta("Base de datos/sequencesMERS.fasta")
+dengue<-read.fasta("Base de datos/sequences dengue.fasta")
+
+length(zika[[1]])
+length(sarscovid[[1]])
+length(wuhan[[1]])
+length(mers[[1]])
+length(dengue[[1]])
+
+count(zika[[1]],1)
+count(sarscovid[[1]],1)
+count(wuhan[[1]],1)
+count(mers[[1]],1)
+count(dengue[[1]],1)
+
+head(zika[[1]])
+head(sarscovid[[1]])
+head(wuhan[[1]])
+head(mers[[1]])
+head(dengue[[1]])
